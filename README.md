@@ -1,5 +1,4 @@
-statsd-jut-backend
-==================
+# statsd-jut-backend [![Build Status: Linux](https://travis-ci.org/jut-io/statsd-jut-backend.png?branch=master)](https://travis-ci.org/jut-io/statsd-jut-backend)
 
 `statsd-jut-backend` is a backend module for
 [StatsD](https://github.com/etsy/statsd) that allows users to write
