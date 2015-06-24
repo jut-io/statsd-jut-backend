@@ -75,7 +75,7 @@ Testing
 -------
 
     npm install
-    grunt test
+    npm test
 
 TODO
 ----
