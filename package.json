@@ -1,6 +1,6 @@
 {
   "name": "statsd-jut-backend",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Jut backend for StatsD",
   "repository": {
     "type": "git",
@@ -24,5 +24,8 @@
     "grunt-mocha-test": "^0.12.7",
     "mocha": "^2.2.5",
     "underscore": "^1.8.3"
+  },
+  "scripts": {
+    "test": "grunt test"
   }
 }
