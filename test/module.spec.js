@@ -118,6 +118,43 @@ describe('jut statsd backend basic init tests', function() {
 
 });
 
+describe('jut statsd backend custom sender test', function() {
+    var events;
+
+    it('initializes the module with a custom sender', function() {
+        events = new EventEmitter();
+
+        var retval = jut_statsd_backend.init(
+            Date.now() / 1000,
+            {
+                jut: {
+                    sender_module: __dirname + '/test-sender',
+                    events: events,
+                },
+                debug: true,
+                flushInterval: 10000,
+            },
+            events,
+            fake_logger
+        );
+
+        expect(retval).to.be.true;
+    });
+
+    it('calls the test sender correctly', function(done) {
+        events.on('test', function(payload) {
+            expect(payload).to.deep.equal(mock_server_data.basic_counter.request.body);
+            done();
+        });
+
+        events.emit(
+            'flush',
+            mock_server_data.basic_counter.input.timestamp,
+            mock_server_data.basic_counter.input.metrics
+        );
+    });
+});
+
 describe('jut statsd backend mock receiver tests', function() {
     this.timeout(30000);
 
