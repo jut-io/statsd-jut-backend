@@ -12,8 +12,8 @@ Change to the StatsD root directory and execute the following:
     npm install statsd-jut-backend
 
 This should install the Jut backend module in the correct
-location. Alternatively, `lib/jut.js` can be copied into the StatsD
-`backend` directory.
+location. Alternatively, all of the `.js` files can be copied into the
+StatsD `backend` directory.
 
 Configuring
 -----------
