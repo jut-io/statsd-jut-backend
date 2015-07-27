@@ -1,0 +1,23 @@
+{
+    "globals" : {
+        "console" : "undefined"
+    },
+    "predef": [ "-Promise" ],
+    "bitwise": true,
+    "curly": true,
+    "eqeqeq" : true,
+    "expr" : true,
+    "immed": true,
+    "latedef" : false,
+    "laxbreak": true,
+    "loopfunc" : true,
+    "newcap" : false,
+    "noarg": true,
+    "node": true,
+    "scripturl" : true,
+    "strict" : false,
+    "smarttabs": true,
+    "sub": true,
+    "undef" : true,
+    "unused": "vars"
+}
