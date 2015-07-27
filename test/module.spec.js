@@ -1,3 +1,5 @@
+/* global it, describe, console, after */
+
 var http = require('http');
 var _ = require('underscore');
 var expect = require('chai').expect;
@@ -29,19 +31,24 @@ var mock_receiver = {
             });
 
             req.on('end', function() {
-                expect(req.method).to.equal('POST');
-                expect(req.url).to.equal('/');
+                try {
+                    expect(req.method).to.equal('POST');
+                    expect(req.url).to.equal('/');
 
-                var json_body = JSON.parse(req_body);
-                expect(json_body).to.deep.equal(expected_request.body);
+                    var json_body = JSON.parse(req_body);
+                    expect(json_body).to.deep.equal(expected_request.body);
 
-                res.writeHead(current_response.status, {'Content-Type': 'application/json'});
+                    res.writeHead(current_response.status, {'Content-Type': 'application/json'});
 
-                if (typeof current_response.body !== 'string') {
-                    res.end(JSON.stringify(current_response.body, null, 2));
-                }
-                else {
-                    res.end(current_response.body);
+                    if (typeof current_response.body !== 'string') {
+                        res.end(JSON.stringify(current_response.body, null, 2));
+                    }
+                    else {
+                        res.end(current_response.body);
+                    }
+                } catch(err) {
+                    res.end();
+                    return self.events.emit('done', err);
                 }
                 self.events.emit('done');
             });
@@ -235,7 +242,7 @@ describe('jut statsd backend mock receiver tests', function() {
         mock_receiver.events.once('done', done);
     });
 
-    it('initializes the backend module with key splitting and counter rates', function() {
+    it('initializes the backend module with key splitting, counter rates, and extra tags', function() {
         events = new EventEmitter();
 
         var retval = jut_statsd_backend.init(
@@ -244,7 +251,11 @@ describe('jut statsd backend mock receiver tests', function() {
                 jut: {
                     url: receiver_url,
                     split_keys: true,
-                    counter_rates: true
+                    counter_rates: true,
+                    tags: {
+                        cats: 'cute',
+                        lives: 9
+                    }
                 },
                 debug: true,
                 flushInterval: 10000,
@@ -270,6 +281,34 @@ describe('jut statsd backend mock receiver tests', function() {
         mock_receiver.events.once('done', done);
     });
 
+    it('initializes the backend module with invalid extra tags', function() {
+        events = new EventEmitter();
+
+        try {
+            jut_statsd_backend.init(
+                Date.now() / 1000,
+                {
+                    jut: {
+                        url: receiver_url,
+                        split_keys: true,
+                        counter_rates: true,
+                        tags: {
+                            time: 1234,
+                            value: 5678
+                        }
+                    },
+                    debug: true,
+                    flushInterval: 10000,
+                },
+                events,
+                fake_logger
+            );
+        } catch(e) {
+            return;
+        }
+
+        throw new Error('this test should fail');
+    });
 
     after(function(done) {
         mock_receiver.stop(done);

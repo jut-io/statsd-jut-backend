@@ -1,4 +1,3 @@
-var send_callback;
 var events;
 
 exports.init = function init(config, jut_stats_in) {

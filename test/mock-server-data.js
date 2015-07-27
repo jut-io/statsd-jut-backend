@@ -50,7 +50,9 @@ module.exports = {
                     "value": 42,
                     "source_type": "metric",
                     "stat": "sum",
-                    "interval": 10000
+                    "interval": 10000,
+                    "cats": "cute",
+                    "lives": 9
                 },
                 {
                     "metric_type": "counter",
@@ -59,7 +61,9 @@ module.exports = {
                     "value": 4.2,
                     "source_type": "metric",
                     "stat": "rate",
-                    "interval": 10000
+                    "interval": 10000,
+                    "cats": "cute",
+                    "lives": 9
                 }
             ],
         },
@@ -166,7 +170,9 @@ module.exports = {
                     "time": 987000,
                     "value": 4,
                     "source_type": "metric",
-                    "interval": 10000
+                    "interval": 10000,
+                    "cats": "cute",
+                    "lives": 9
                 },
                 {
                     "metric_type": "gauge",
@@ -178,7 +184,9 @@ module.exports = {
                     "time": 987000,
                     "value": 27,
                     "source_type": "metric",
-                    "interval": 10000
+                    "interval": 10000,
+                    "cats": "cute",
+                    "lives": 9
                 },
                 {
                     "metric_type": "gauge",
@@ -189,7 +197,9 @@ module.exports = {
                     "time": 987000,
                     "value": 17,
                     "source_type": "metric",
-                    "interval": 10000
+                    "interval": 10000,
+                    "cats": "cute",
+                    "lives": 9
                 }
             ],
         },

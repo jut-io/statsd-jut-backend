@@ -69,7 +69,7 @@ This will send a metric to the Jut system with the name `pizza`,
 tagged with `topping=pepperoni` and `diameter_inches=18`. This is in
 addition to any standard tags that are applied to every point. Note
 that some tags are reserved for internal use (please see
-`RESERVED_TAGS` in `lib/jut.js`).
+`RESERVED_TAGS` in `lib/parse.js`).
 
 Testing
 -------
