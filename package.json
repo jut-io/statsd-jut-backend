@@ -1,6 +1,6 @@
 {
   "name": "statsd-jut-backend",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Jut backend for StatsD",
   "repository": {
     "type": "git",
