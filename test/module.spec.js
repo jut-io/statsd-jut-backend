@@ -36,6 +36,17 @@ var mock_receiver = {
                     expect(req.url).to.equal('/');
 
                     var json_body = JSON.parse(req_body);
+
+                    // both check that the time is ISO-8601 and
+                    // rewrite as ms-since-epoch so the deep compare
+                    // below succeeds
+                    json_body.forEach(function(item) {
+                        var d = new Date(item.time);
+                        expect(item.time).to.be.a('string');
+                        expect(item.time).to.equal(d.toISOString());
+                        item.time = d.getTime();
+                    });
+
                     expect(json_body).to.deep.equal(expected_request.body);
 
                     res.writeHead(current_response.status, {'Content-Type': 'application/json'});
@@ -150,7 +161,9 @@ describe('jut statsd backend custom sender test', function() {
 
     it('calls the test sender correctly', function(done) {
         events.on('test', function(payload) {
-            expect(payload).to.deep.equal(mock_server_data.basic_counter.request.body);
+            // quick and dirty test, stricter tests later on
+            expect(payload).to.have.length(mock_server_data.basic_counter.request.body.length);
+            expect(_.omit(payload[0], 'time')).to.deep.equal(_.omit(mock_server_data.basic_counter.request.body[0], 'time'));
             done();
         });
 
