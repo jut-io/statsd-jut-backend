@@ -98,6 +98,35 @@ module.exports = {
             body: 'OK',
         }
     },
+    override_internal_tags: {
+        input: {
+            timestamp: 456,
+            metrics: {
+                counters: {
+                    "bar.metric_type__notacounter.stat__neato.source_type__totallynotametric": 42
+                }
+            }
+        },
+        request: {
+            body: [
+                {
+                    "metric_type": "notacounter",
+                    "stat": "neato",
+                    "name": "bar",
+                    "time": 456000,
+                    "value": 42,
+                    "source_type": "totallynotametric",
+                    "interval": 10000,
+                    "cats": "cute",
+                    "lives": 9
+                }
+            ],
+        },
+        response: {
+            status: 200,
+            body: 'OK',
+        }
+    },
     timer_with_stats: {
         input: {
             timestamp: 789,

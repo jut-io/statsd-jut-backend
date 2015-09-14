@@ -294,6 +294,13 @@ describe('jut statsd backend mock receiver tests', function() {
         mock_receiver.events.once('done', done);
     });
 
+    it('is able to override some internal tags', function(done) {
+        mock_receiver.current_test = 'override_internal_tags';
+        emit_event('override_internal_tags');
+
+        mock_receiver.events.once('done', done);
+    });
+
     it('initializes the backend module with invalid extra tags', function() {
         events = new EventEmitter();
 
