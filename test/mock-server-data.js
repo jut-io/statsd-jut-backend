@@ -19,7 +19,7 @@ module.exports = {
                     "time": 123000,
                     "value": 42,
                     "source_type": "metric",
-                    "stat": "sum",
+                    "stat": "delta",
                     "interval": 10000
                 }
             ],
@@ -49,7 +49,7 @@ module.exports = {
                     "time": 123000,
                     "value": 42,
                     "source_type": "metric",
-                    "stat": "sum",
+                    "stat": "delta",
                     "interval": 10000,
                     "cats": "cute",
                     "lives": 9
