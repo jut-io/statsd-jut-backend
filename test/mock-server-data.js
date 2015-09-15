@@ -19,7 +19,7 @@ module.exports = {
                     "time": 123000,
                     "value": 42,
                     "source_type": "metric",
-                    "stat": "sum",
+                    "stat": "delta",
                     "interval": 10000
                 }
             ],
@@ -49,7 +49,7 @@ module.exports = {
                     "time": 123000,
                     "value": 42,
                     "source_type": "metric",
-                    "stat": "sum",
+                    "stat": "delta",
                     "interval": 10000,
                     "cats": "cute",
                     "lives": 9
@@ -90,6 +90,35 @@ module.exports = {
                     "value": 42,
                     "source_type": "metric",
                     "interval": 10000
+                }
+            ],
+        },
+        response: {
+            status: 200,
+            body: 'OK',
+        }
+    },
+    override_internal_tags: {
+        input: {
+            timestamp: 456,
+            metrics: {
+                counters: {
+                    "bar.metric_type__notacounter.stat__neato.source_type__totallynotametric": 42
+                }
+            }
+        },
+        request: {
+            body: [
+                {
+                    "metric_type": "notacounter",
+                    "stat": "neato",
+                    "name": "bar",
+                    "time": 456000,
+                    "value": 42,
+                    "source_type": "totallynotametric",
+                    "interval": 10000,
+                    "cats": "cute",
+                    "lives": 9
                 }
             ],
         },
