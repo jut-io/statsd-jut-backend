@@ -330,6 +330,30 @@ describe('jut statsd backend mock receiver tests', function() {
         throw new Error('this test should fail');
     });
 
+    it('checks some stats', function(done) {
+        var seen_flush = false;
+        var seen_exception = false;
+
+        function check_stats(key, value) {
+            if (key === 'lastFlush') {
+                seen_flush = true;
+                expect(value * 1000).to.be.at.most(Date.now());
+            }
+            else if (key === 'lastException') {
+                seen_exception = true;
+                expect(value * 1000).to.be.at.most(Date.now());
+            }
+
+            if (seen_flush && seen_exception) {
+                done();
+            }
+        }
+
+        jut_statsd_backend.status(function(a, backend, key, value) {
+            check_stats(key, value);
+        });
+    });
+
     after(function(done) {
         mock_receiver.stop(done);
     });
